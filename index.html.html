@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divórcio Extrajudicial no Cartório de Notas | Filipe Nunes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --navy-mid: #1a3360;
+    --gold: #c8a84b;
+    --gold-light: #e8c96b;
+    --cream: #faf7f2;
+    --ink: #1c1c1c;
+    --muted: #6b7280;
+    --border: #e2d9cc;
+    --accent-bg: #f0ebe3;
+    --highlight: #fff8e8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 20px;
+  }
+  .topbar span { color: var(--gold); }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 32px 60px;
+    position: relative;
+    z-index: 2;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,75,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '§';
+    position: absolute;
+    bottom: -30px; right: 40px;
+    font-size: 260px;
+    font-family: 'Playfair Display', serif;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .tag {
+    display: inline-block;
+    background: rgba(200,168,75,0.18);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  h1.post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.18;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  h1.post-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 19px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .author-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--navy-mid) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    flex-shrink: 0;
+    border: 2px solid rgba(200,168,75,0.4);
+  }
+  .author-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .author-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .meta-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.15); }
+  .meta-item {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress {
+    position: fixed; top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    z-index: 999;
+    transition: width 0.1s linear;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ── SUMMARY BOX ── */
+  .summary-box {
+    background: var(--navy);
+    color: #fff;
+    padding: 36px 40px;
+    margin: 56px 0 0;
+    border-left: 4px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .summary-box::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .summary-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .summary-box p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.82);
+    font-weight: 300;
+  }
+  .summary-box strong { color: #fff; font-weight: 600; }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+  .toc-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+    padding: 0;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .toc ol li:last-child { border-bottom: none; }
+  .toc ol li::before {
+    content: "0" counter(toc);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .toc ol li a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--gold); }
+
+  /* ── ARTICLE BODY ── */
+  article { padding: 56px 0 80px; }
+
+  .section { margin-bottom: 64px; }
+
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.25;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+    position: relative;
+  }
+  h2.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 60px; height: 2px;
+    background: var(--gold);
+  }
+
+  h3.subsection {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--navy-mid);
+    margin: 40px 0 16px;
+  }
+
+  p { margin-bottom: 20px; }
+
+  .lead {
+    font-size: 20px;
+    font-weight: 300;
+    color: #2c2c2c;
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+
+  /* ── CALLOUT / DESTAQUE ── */
+  .callout {
+    border-left: 3px solid var(--gold);
+    background: var(--highlight);
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 17px;
+    color: #333;
+  }
+  .callout strong { color: var(--navy); }
+
+  .callout-warning {
+    border-left: 3px solid #d97706;
+    background: #fffbeb;
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 16px;
+  }
+  .callout-warning .warn-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #d97706;
+    margin-bottom: 8px;
+  }
+
+  .callout-law {
+    background: #f0f4ff;
+    border-left: 3px solid var(--navy-mid);
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 15px;
+    font-style: italic;
+    color: #2a2a3e;
+  }
+  .callout-law .law-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--navy-mid);
+    font-style: normal;
+    margin-bottom: 8px;
+  }
+
+  /* ── BLOCKQUOTE ── */
+  blockquote {
+    border-left: none;
+    padding: 32px 36px;
+    margin: 40px 0;
+    background: var(--navy);
+    color: rgba(255,255,255,0.88);
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.65;
+    position: relative;
+  }
+  blockquote::before {
+    content: '"';
+    font-size: 80px;
+    color: var(--gold);
+    line-height: 0;
+    position: absolute;
+    top: 50px; left: 18px;
+    opacity: 0.4;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 16px;
+    font-size: 13px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── LISTS ── */
+  .doc-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 28px;
+  }
+  .doc-list li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .doc-list li:last-child { border-bottom: none; }
+  .doc-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 22px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .doc-group {
+    background: #fff;
+    border: 1px solid var(--border);
+    margin: 24px 0;
+    overflow: hidden;
+  }
+  .doc-group-title {
+    background: var(--navy);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+  }
+  .doc-group ul {
+    list-style: none;
+    padding: 0;
+  }
+  .doc-group ul li {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .doc-group ul li:last-child { border-bottom: none; }
+  .doc-group ul li::before {
+    content: '→';
+    color: var(--gold);
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── ARGUMENT CARDS ── */
+  .argument-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .arg-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .arg-card:hover {
+    box-shadow: 0 8px 32px rgba(15,31,61,0.10);
+    transform: translateY(-2px);
+  }
+  .arg-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .arg-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .arg-body {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #444;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { margin: 36px 0; }
+  .timeline-item {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 32px;
+    position: relative;
+  }
+  .timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 18px; top: 36px; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+  .timeline-content { padding-top: 6px; }
+  .timeline-year {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .timeline-text {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  /* ── REFERENCES ── */
+  .references {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    padding: 36px 40px;
+    margin-top: 64px;
+  }
+  .references-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .references ol {
+    list-style: none;
+    counter-reset: refs;
+    padding: 0;
+  }
+  .references ol li {
+    counter-increment: refs;
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+  }
+  .references ol li:last-child { border-bottom: none; }
+  .references ol li::before {
+    content: counter(refs);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--navy);
+    min-width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── AUTHOR BIO ── */
+  .author-bio {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 32px 36px;
+    margin-top: 48px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .bio-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--gold) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #fff;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid var(--gold);
+  }
+  .bio-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .bio-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .bio-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .bio-text p {
+    margin: 0;
+  }
+  .bio-content {
+    flex: 1;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+  }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+  .ornament {
+    text-align: center;
+    margin: 40px 0;
+    color: var(--gold);
+    font-size: 22px;
+    letter-spacing: 12px;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 20px; }
+    .header-inner { padding: 48px 20px 40px; }
+    .summary-box { padding: 24px 20px; }
+    .toc { padding: 20px; }
+    .author-bio { flex-direction: column; }
+    .references { padding: 24px 20px; }
+    blockquote { padding: 28px 24px; font-size: 17px; }
+    .argument-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="topbar">Direito Registral &amp; Notarial &nbsp;·&nbsp; <span>Direito Extrajudicial</span> &nbsp;·&nbsp; Brasil</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="tag">Artigo Jurídico · Leitura: ~15 min</div>
+    <h1 class="post-title">Divórcio Extrajudicial<br>no Cartório de Notas:<br><em>Da Documentação à Competência Notarial</em></h1>
+    <p class="subtitle">Uma análise aprofundada dos requisitos documentais, da livre escolha do Tabelião e do papel da desjudicialização como instrumento de cidadania e acesso à Justiça no Brasil.</p>
+    <div class="meta">
+      <div class="author-block">
+        <div class="author-avatar">F</div>
+        <div>
+          <div class="author-name">Filipe Nunes</div>
+          <div class="author-title"></div>
+        </div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">📅 2025</div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">📚 Direito Notarial</div>
+    </div>
+  </div>
+</header>
+
+<!-- BODY -->
+<div class="container">
+
+  <div class="summary-box">
+    <div class="summary-title">Resumo do Artigo</div>
+    <p>Este artigo examina o <strong>divórcio extrajudicial</strong> previsto na Lei n.º 11.441/2007 e regulamentado pela Resolução CNJ n.º 35/2007, respondendo a duas questões centrais: quais documentos são exigidos para lavrar a escritura de divórcio? E aplica-se o Código de Processo Civil na escolha do Tabelião? A análise percorre os fundamentos normativos, as razões principiológicas e as implicações práticas do instituto, defendendo que a desjudicialização representa uma conquista civilizatória de acesso à Justiça em seu sentido mais amplo.</p>
+  </div>
+
+  <!-- SUMÁRIO -->
+  <div class="toc">
+    <div class="toc-title">Sumário</div>
+    <ol>
+      <li><a href="#contexto">Contexto Histórico: Do Judiciário ao Cartório</a></li>
+      <li><a href="#documentos">Documentos Necessários para a Escritura de Divórcio</a></li>
+      <li><a href="#advogado">A Obrigatoriedade do Advogado e a Segurança Jurídica</a></li>
+      <li><a href="#filhos">A Vedação nos Casos com Filhos Menores ou Incapazes</a></li>
+      <li><a href="#competencia">Competência para a Escolha do Tabelião</a></li>
+      <li><a href="#autonomia">Autonomia Privada e Livre Escolha do Cartório</a></li>
+      <li><a href="#desjudicializacao">Desjudicialização como Instrumento de Cidadania</a></li>
+      <li><a href="#ec66">A EC n.º 66/2010 e a Evolução do Instituto</a></li>
+      <li><a href="#conclusao">Conclusão</a></li>
+      <li><a href="#referencias">Referências</a></li>
+    </ol>
+  </div>
+
+  <article>
+
+    <!-- 1 -->
+    <div class="section" id="contexto">
+      <h2 class="section-title">1. Contexto Histórico: Do Judiciário ao Cartório</h2>
+
+      <p class="lead">A dissolução do vínculo matrimonial no Brasil foi, por décadas, um processo lento, oneroso e invariavelmente judicial. Quem desejasse divorciar-se precisava suportar os trâmites de uma ação judicial que, não raramente, consumia anos e expunha as partes a conflitos desnecessários.</p>
+
+      <p>O quadro normativo anterior à Lei n.º 11.441/2007 exigia que o divórcio — mesmo quando consensual e sem qualquer litígio entre os cônjuges — passasse obrigatoriamente pelo crivo do Poder Judiciário. O juiz, a audiência, o Ministério Público, os prazos processuais: tudo isso integrava uma estrutura pensada para conflitos, mas que era imposta mesmo quando não havia conflito algum.</p>
+
+      <p>Esse cenário começou a mudar com a crescente percepção de que o Estado deveria reservar a máquina judiciária para as situações que verdadeiramente exigissem a intervenção de um terceiro imparcial investido de poder jurisdicional. Para os atos de mera vontade bilateral, consensuais e sem vulneráveis a proteger, outra solução se impunha.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-content">
+            <div class="timeline-year">2004</div>
+            <div class="timeline-text">O Senador César Borges apresenta o Projeto de Lei n.º 155/2004, propondo a desjudicialização do inventário extrajudicial. A proposta seria a semente da reforma que viria a seguir.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-content">
+            <div class="timeline-year">2004</div>
+            <div class="timeline-text">A Emenda Constitucional n.º 45/2004 ("Reforma do Judiciário") consagra no art. 5.º, LXXVIII, o direito à razoável duração do processo, criando pressão normativa e política para simplificar procedimentos.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-content">
+            <div class="timeline-year">4 mar. 2007</div>
+            <div class="timeline-text">Publicação da <strong>Lei n.º 11.441/2007</strong>, que altera o CPC/1973 e autoriza a realização de inventário, partilha, separação consensual e divórcio consensual por escritura pública em Cartório de Notas.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <div class="timeline-year">24 abr. 2007</div>
+            <div class="timeline-text">O Conselho Nacional de Justiça edita a <strong>Resolução n.º 35/2007</strong>, regulamentando os procedimentos extrajudiciais nos Tabelionatos de Notas, com disposições sobre documentos, competência e requisitos.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-content">
+            <div class="timeline-year">13 jul. 2010</div>
+            <div class="timeline-text">A <strong>Emenda Constitucional n.º 66/2010</strong> altera o art. 226, § 6.º, da Constituição Federal, extinguindo o requisito de prévia separação judicial por um ano para o divórcio direto, ampliando radicalmente o alcance do instituto.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">6</div>
+          <div class="timeline-content">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-text">O novo <strong>Código de Processo Civil (Lei n.º 13.105/2015)</strong> incorpora e aprimora o divórcio extrajudicial, consolidando o procedimento no art. 733, reafirmando o consenso e a ausência de filhos incapazes como requisitos.</div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        "Nós precisamos desjudicializar a vida brasileira."
+        <cite>— Min. Luís Roberto Barroso, XIII Fórum de Integração Jurídica, agosto de 2023</cite>
+      </blockquote>
+
+      <p>A frase do ministro sintetiza um consenso que transcende gerações e orientações políticas no campo jurídico: o Poder Judiciário, com mais de 80 milhões de processos em andamento, não pode ser o único caminho para a resolução de questões que poderiam ser tratadas com mais celeridade, menor custo e igual segurança jurídica pela via extrajudicial.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 2 -->
+    <div class="section" id="documentos">
+      <h2 class="section-title">2. Documentos Necessários para a Escritura de Divórcio</h2>
+
+      <p class="lead">A escritura pública de divórcio é o instrumento pelo qual o Tabelião formaliza, com fé pública, a vontade consensual dos cônjuges de dissolver o casamento. Para tanto, a lei e a regulamentação do CNJ exigem um conjunto específico de documentos.</p>
+
+      <p>Com base na Lei n.º 11.441/2007 e na Resolução CNJ n.º 35/2007, os cônjuges devem apresentar ao Tabelião de Notas os seguintes documentos, agrupados por categoria:</p>
+
+      <div class="doc-group">
+        <div class="doc-group-title">📋 Documentos Pessoais dos Cônjuges</div>
+        <ul>
+          <li>Documentos de identificação com foto — RG, CNH ou passaporte válido</li>
+          <li>Cadastro de Pessoa Física (CPF) de ambos os cônjuges</li>
+          <li>Certidão de nascimento de cada cônjuge</li>
+          <li>Comprovante de endereço atualizado (recomendável)</li>
+          <li>Informação sobre profissão e estado civil atual</li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <div class="doc-group-title">💍 Documentos do Casamento</div>
+        <ul>
+          <li>Certidão de casamento atualizada — em regra, expedida nos últimos 90 dias. A atualização é necessária para que o Tabelião verifique eventuais averbações ou alterações no estado civil</li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <div class="doc-group-title">🏠 Documentos Relativos aos Bens (quando houver partilha)</div>
+        <ul>
+          <li><strong>Imóveis:</strong> certidão de matrícula atualizada (últimos 30 dias) expedida pelo Cartório de Registro de Imóveis; certidão negativa de ônus; carnê de IPTU; certidão negativa de débitos municipais e, quando aplicável, declaração de quitação de débitos condominiais</li>
+          <li><strong>Imóveis rurais:</strong> certidão negativa atualizada; ITR dos últimos 5 anos ou Certidão Negativa de Débitos emitida pela Receita Federal; Certificado de Cadastro de Imóvel Rural (CCIR)</li>
+          <li><strong>Veículos:</strong> CRV (Certificado de Registro de Veículo) ou CRLV atualizado</li>
+          <li><strong>Aplicações financeiras:</strong> extratos das contas bancárias e de investimentos com saldo na data da escritura</li>
+          <li><strong>Participações societárias:</strong> contrato social com as últimas alterações e, se aplicável, balanço patrimonial da empresa</li>
+        </ul>
+      </div>
+
+      <div class="doc-group">
+        <div class="doc-group-title">👨‍👩‍👧 Documentos Relativos aos Filhos (maiores e capazes)</div>
+        <ul>
+          <li>Certidão de nascimento de cada filho maior e capaz, apresentada para fins de registro no ato notarial</li>
+          <li>Documentos de identificação e CPF dos filhos maiores (quando aplicável)</li>
+        </ul>
+      </div>
+
+      <div class="callout-warning">
+        <div class="warn-label">⚠️ Atenção — Filhos Menores ou Incapazes</div>
+        A presença de filhos menores de 18 anos ou de filhos incapazes (independente da idade) <strong>veda a realização do divórcio extrajudicial</strong>, nos termos do art. 733 do CPC/2015. Nesses casos, o procedimento deve ser obrigatoriamente judicial. Exceção: se houver prévia decisão judicial definitiva sobre guarda, visitação e alimentos relativamente aos filhos, o divórcio pode, em tese, ser realizado no cartório. Consulte sempre um advogado sobre o caso concreto.
+      </div>
+
+      <div class="callout-law">
+        <div class="law-label">📜 Texto Legal — Art. 733 do CPC/2015</div>
+        "O divórcio consensual, a separação consensual e a extinção consensual de união estável, não havendo nascituro ou filhos incapazes e observados os requisitos legais, poderão ser realizados por escritura pública, da qual constarão as disposições de que trata o art. 731."
+      </div>
+
+      <h3 class="subsection">Partilha de bens: obrigatória ou facultativa?</h3>
+
+      <p>Um ponto que gera frequente dúvida prática é se a partilha dos bens comuns precisa ser realizada no mesmo ato da escritura de divórcio. A resposta é: <strong>não obrigatoriamente</strong>. A Resolução CNJ n.º 35/2007 admite que os cônjuges procedam ao divórcio sem partilha, deixando-a para momento posterior por meio de escritura autônoma de partilha de bens. Contudo, é fortemente recomendável que a partilha seja feita concomitantemente, evitando-se o condomínio forçado e eventuais conflitos futuros sobre a propriedade dos bens.</p>
+
+      <p>Existindo bens imóveis, é importante que o traslado (cópia autêntica) da escritura seja apresentado ao Cartório de Registro de Imóveis para averbação, ao Detran para transferência de veículos e aos demais órgãos competentes para a efetivação da transferência de titularidade.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 3 -->
+    <div class="section" id="advogado">
+      <h2 class="section-title">3. A Obrigatoriedade do Advogado e a Segurança Jurídica</h2>
+
+      <p class="lead">Embora o divórcio extrajudicial prescinda de intervenção judicial, a lei não abriu mão de uma salvaguarda essencial: a presença obrigatória de advogado devidamente inscrito na OAB.</p>
+
+      <p>O art. 8.º da Resolução CNJ n.º 35/2007 estabelece que o Tabelião somente poderá lavrar a escritura de divórcio se as partes estiverem assistidas por advogado, comum a ambos ou cada qual com o seu. O nome, o número de inscrição na OAB e a assinatura do advogado devem constar expressamente do ato notarial.</p>
+
+      <div class="callout">
+        <strong>Ponto de reflexão doutrinária:</strong> há quem critique a exigência do advogado como burocracia desnecessária que encarece o procedimento. Discordamos frontalmente dessa visão. A obrigatoriedade da assistência jurídica é uma das mais importantes garantias do sistema extrajudicial e sua supressão representaria risco real aos direitos das partes.
+      </div>
+
+      <p>Há pelo menos três razões sólidas que justificam a manutenção dessa exigência:</p>
+
+      <div class="argument-grid">
+        <div class="arg-card">
+          <div class="arg-number">01</div>
+          <div class="arg-title">Proteção contra vícios de vontade</div>
+          <div class="arg-body">O advogado identifica situações de coação, simulação ou erro sobre a extensão dos direitos renunciados, especialmente em casamentos com desequilíbrio de poder entre os cônjuges.</div>
+        </div>
+        <div class="arg-card">
+          <div class="arg-number">02</div>
+          <div class="arg-title">Verificação técnica da escritura</div>
+          <div class="arg-body">Cabe ao advogado conferir se a escritura está em conformidade com a lei vigente, se os bens foram corretamente descritos e se as cláusulas de alimentos atendem ao mínimo legal.</div>
+        </div>
+        <div class="arg-card">
+          <div class="arg-number">03</div>
+          <div class="arg-title">Responsabilidade profissional</div>
+          <div class="arg-body">A subscrição do advogado gera responsabilidade civil e disciplinar perante a OAB, criando um incentivo institucional para o rigor técnico e a boa-fé no procedimento.</div>
+        </div>
+      </div>
+
+      <p>O art. 133 da Constituição Federal consagra o advogado como indispensável à administração da Justiça — e o divórcio extrajudicial não foge a essa lógica. Mesmo sem litígio, a dissolução de uma sociedade conjugal envolve questões patrimoniais, alimentares e sucessórias que exigem orientação técnica especializada.</p>
+
+      <div class="callout-law">
+        <div class="law-label">📜 Art. 133 da Constituição Federal</div>
+        "O advogado é indispensável à administração da justiça, sendo inviolável por seus atos e manifestações no exercício da profissão, nos limites da lei."
+      </div>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 4 -->
+    <div class="section" id="filhos">
+      <h2 class="section-title">4. A Vedação nos Casos com Filhos Menores ou Incapazes</h2>
+
+      <p>A restrição do divórcio extrajudicial às hipóteses em que não há filhos menores ou incapazes não é um defeito do sistema — é uma opção constitucionalmente obrigatória. O princípio do melhor interesse da criança e do adolescente, consagrado no art. 227 da Constituição Federal e reafirmado pelo Estatuto da Criança e do Adolescente, exige que o Estado intervenha para proteger quem não tem capacidade plena de defender seus próprios interesses.</p>
+
+      <p>Nas hipóteses de filhos menores, a dissolução conjugal envolve questões que transcendem a esfera patrimonial dos cônjuges: guarda (unilateral ou compartilhada), regulamentação de visitas, fixação de alimentos, domicílio e educação. Tais questões demandam avaliação jurisdicional que a serventia extrajudicial, por sua própria natureza administrativa, não tem condições de realizar.</p>
+
+      <blockquote>
+        "O interesse das crianças não pode ser negociado como um bem patrimonial. Onde há menores, há interesse público e, portanto, há necessidade de tutela estatal."
+        <cite>— Reflexão doutrinária sobre o art. 227 da CF/88</cite>
+      </blockquote>
+
+      <p>Vale registrar, contudo, uma hipótese de exceção que tem ganhado espaço na prática notarial: quando já existe <strong>decisão judicial transitada em julgado</strong> que tenha resolvido todas as questões relativas aos filhos menores (guarda, visita e alimentos), alguns tabeliões têm admitido a lavratura da escritura de divórcio. Trata-se de uma interpretação extensiva da norma que merece análise cuidadosa caso a caso e prévia consulta ao advogado.</p>
+
+      <h3 class="subsection">E a gravidez?</h3>
+      <p>Outra hipótese de vedação que merece atenção é a gravidez. Se a mulher estiver grávida ao tempo da escritura, não poderá ser lavrado o divórcio extrajudicial, pois o nascituro é equiparado ao filho incapaz para fins de proteção legal (art. 2.º do Código Civil). O procedimento deve ser, nesse caso, necessariamente judicial.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 5 -->
+    <div class="section" id="competencia">
+      <h2 class="section-title">5. Competência para a Escolha do Tabelião: Por que o CPC não se Aplica</h2>
+
+      <p class="lead">A segunda questão central do tema é, talvez, a mais tecnicamente instigante: aplica-se o Código de Processo Civil na escolha do Cartório de Notas para o divórcio extrajudicial?</p>
+
+      <p>A resposta é inequívoca: <strong>não se aplicam</strong>. E a compreensão dessa resposta exige uma distinção conceitual fundamental entre a atividade jurisdicional e a atividade notarial.</p>
+
+      <h3 class="subsection">A natureza jurídica da atividade notarial</h3>
+
+      <p>As normas de competência territorial previstas nos arts. 21 a 53 do CPC/2015 têm como pressuposto lógico a existência de um processo judicial, com partes, pedido e julgamento. Elas disciplinam a distribuição do poder estatal de julgar (jurisdição) entre os diferentes órgãos do Poder Judiciário. Não há como aplicá-las onde não há jurisdição.</p>
+
+      <p>O Tabelião de Notas não julga, não decide, não sentencia. Ele <em>autentica</em>, <em>documenta</em> e confere <em>fé pública</em> a atos jurídicos voluntários. A atividade notarial é de natureza administrativa, preventiva e instrumental — completamente diversa da atividade jurisdicional.</p>
+
+      <div class="callout">
+        <strong>Distinção essencial:</strong> enquanto o juiz age para <em>resolver</em> um conflito existente, o Tabelião age para <em>prevenir</em> conflitos futuros, documentando com precisão e segurança a vontade das partes. São funções distintas, com pressupostos distintos e regimes jurídicos distintos.
+      </div>
+
+      <h3 class="subsection">O fundamento normativo: Resolução CNJ n.º 35/2007</h3>
+
+      <p>O art. 1.º da Resolução CNJ n.º 35/2007 é categórico:</p>
+
+      <div class="callout-law">
+        <div class="law-label">📜 Art. 1.º da Resolução CNJ n.º 35/2007</div>
+        "É livre a escolha do tabelião de notas, não se aplicando as regras de competência do Código de Processo Civil."
+      </div>
+
+      <p>Em termos práticos, isso significa que qualquer casal brasileiro pode lavrar sua escritura de divórcio em <strong>qualquer Cartório de Notas do território nacional</strong>, independentemente de:</p>
+
+      <ul class="doc-list">
+        <li>Domicílio ou residência dos cônjuges</li>
+        <li>Local em que o casamento foi celebrado</li>
+        <li>Estado ou município em que os bens partilhados estejam situados</li>
+        <li>Foro de eventual ação judicial anterior sobre o mesmo casamento</li>
+      </ul>
+
+      <p>Trata-se de competência absolutamente livre, sem hierarquia, sem preferência territorial e sem necessidade de qualquer justificativa para a escolha do cartório.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 6 -->
+    <div class="section" id="autonomia">
+      <h2 class="section-title">6. Autonomia Privada, Mercado Notarial e a Livre Escolha do Cartório</h2>
+
+      <p>A livre escolha do Cartório de Notas não é apenas uma opção normativa conveniente — é uma expressão do princípio da <strong>autonomia privada</strong>, um dos pilares do direito civil contemporâneo, reconhecido no art. 421-A e outros dispositivos do Código Civil de 2002.</p>
+
+      <p>Quando o Estado reconhece que adultos capazes, assistidos por advogado e de pleno acordo, podem escolher onde formalizar sua separação, está reconhecendo a capacidade das partes de gerir seus próprios interesses da maneira que melhor lhes convier. É o Estado servindo ao cidadão, e não o cidadão servindo ao Estado.</p>
+
+      <h3 class="subsection">O argumento do "forum shopping notarial"</h3>
+
+      <p>Há críticas que apontam para o risco do chamado <em>forum shopping</em> notarial — a escolha estratégica do cartório com base em diferenças nos emolumentos ou na qualidade técnica do serviço. Vale, contudo, relativizar essa crítica por duas razões:</p>
+
+      <div class="argument-grid">
+        <div class="arg-card">
+          <div class="arg-number">01</div>
+          <div class="arg-title">Emolumentos tabelados por lei</div>
+          <div class="arg-body">As tabelas de emolumentos são fixadas por lei estadual, sendo uniformes em todo o estado. Portanto, não há diferença de custo entre cartórios do mesmo estado, o que limita o incentivo à escolha por critérios econômicos.</div>
+        </div>
+        <div class="arg-card">
+          <div class="arg-number">02</div>
+          <div class="arg-title">Padronização normativa do CNJ</div>
+          <div class="arg-body">As normas do CNJ e os Códigos de Normas estaduais padronizam os procedimentos em todo o território, o que garante um patamar mínimo de qualidade técnica independentemente do cartório escolhido.</div>
+        </div>
+      </div>
+
+      <p>Desse modo, a livre escolha do cartório não gera distorções sistêmicas; ao contrário, <strong>estimula a eficiência</strong> e <strong>respeita a autonomia</strong> dos cidadãos — valores que devem ser celebrados, e não temidos.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 7 -->
+    <div class="section" id="desjudicializacao">
+      <h2 class="section-title">7. Desjudicialização como Instrumento de Cidadania e Acesso à Justiça</h2>
+
+      <p class="lead">Além das questões técnicas, o divórcio extrajudicial suscita uma reflexão mais profunda sobre o conceito de acesso à Justiça e o papel do Estado na vida dos cidadãos.</p>
+
+      <p>O <strong>acesso à Justiça</strong>, garantido no art. 5.º, XXXV, da Constituição Federal, é frequentemente lido como sinônimo de acesso ao Poder Judiciário. Trata-se, contudo, de uma leitura reducionista. O que a norma garante é o direito de ter a demanda apreciada pelo Estado — e essa apreciação pode se dar por diferentes vias, inclusive pela via extrajudicial, desde que com garantias equivalentes de segurança e legalidade.</p>
+
+      <div class="callout">
+        <strong>Tese central:</strong> quando um casal resolve sua separação no Cartório de Notas em dias, com custo reduzido, com assistência jurídica e com plena validade legal, está sendo atendido em sua demanda por Justiça de forma plena, eficaz e muito mais racional do que por meio de uma ação judicial que duraria anos.
+      </div>
+
+      <p>Os números confirmam a efetividade do instituto. Segundo dados do Colégio Notarial do Brasil, desde 2007 já foram lavradas <strong>mais de 1 milhão de escrituras públicas de divórcio</strong> em todo o país. Isso representa mais de 1 milhão de dissoluções conjugais que não precisaram passar pelo Poder Judiciário — aliviando o sistema, reduzindo custos públicos e privados e, acima de tudo, respeitando a autonomia dos cidadãos.</p>
+
+      <h3 class="subsection">Desjudicialização e democratização do acesso</h3>
+
+      <p>Há um aspecto social da desjudicialização que merece especial atenção: antes da Lei n.º 11.441/2007, o processo judicial de divórcio impunha às partes custos significativos, não apenas com honorários advocatícios mas com custas processuais, perícias, audiências e a demora inerente ao processo. Para casais de menor renda, esse conjunto de obstáculos tornava o divórcio uma conquista difícil e demorada.</p>
+
+      <p>A escritura pública de divórcio no cartório, embora não seja gratuita em regra, é substancialmente mais rápida e, na prática, mais acessível. A lei prevê ainda a gratuidade para os que se declararem pobres na forma da lei, ampliando ainda mais o alcance do instituto às camadas mais vulneráveis da população.</p>
+
+      <blockquote>
+        "A desjudicialização não representa um enfraquecimento do sistema de justiça. Representa, ao contrário, sua maturidade — a capacidade de reconhecer que nem todo problema social precisa passar pelo crivo de um juiz."
+        <cite>— Filipe Nunes</cite>
+      </blockquote>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 8 -->
+    <div class="section" id="ec66">
+      <h2 class="section-title">8. A EC n.º 66/2010 e a Evolução do Instituto</h2>
+
+      <p>Não se pode analisar o divórcio extrajudicial sem mencionar a importante evolução trazida pela <strong>Emenda Constitucional n.º 66, de 13 de julho de 2010</strong>, que alterou o § 6.º do art. 226 da Constituição Federal.</p>
+
+      <div class="callout-law">
+        <div class="law-label">📜 Art. 226, § 6.º da CF/88 — Redação dada pela EC n.º 66/2010</div>
+        "O casamento civil pode ser dissolvido pelo divórcio."
+      </div>
+
+      <p>A mudança, aparentemente simples, teve consequências profundas. A redação anterior exigia a prévia separação judicial por mais de um ano, ou a separação de fato por mais de dois anos, como condição para o divórcio. Com a EC n.º 66/2010, esses prazos foram extirpados do texto constitucional, permitindo o divórcio direto, imediato e sem qualquer prazo mínimo.</p>
+
+      <p>O Supremo Tribunal Federal, no julgamento do Tema 1.053 da repercussão geral, consolidou o entendimento de que, após a EC n.º 66/2010, a separação judicial deixou de existir como figura autônoma no ordenamento jurídico brasileiro, não sendo mais requisito para o divórcio nem podendo ser imposta às partes.</p>
+
+      <p>Para o divórcio extrajudicial, essa evolução foi particularmente relevante: eliminou a necessidade de comprovação de prazos, simplificou a documentação exigida e tornou o procedimento ainda mais célere e acessível.</p>
+
+      <h3 class="subsection">A separação de corpos no contexto atual</h3>
+
+      <p>Vale uma observação sobre o instituto da separação de corpos, que preserva relevância mesmo após a EC n.º 66/2010. A separação de corpos produz efeitos patrimoniais imediatos — suspende a comunicação de bens e dívidas, mas não dissolve o vínculo conjugal. O cônjuge separado de corpos permanece, portanto, impedido de contrair novo casamento até a lavatura da escritura de divórcio ou da sentença judicial que o declare.</p>
+
+      <p>No plano extrajudicial, a separação de corpos consensual pode ser documentada por instrumento particular ou por escritura pública, mas a produção de seus efeitos patrimoniais plenos exige atenção ao regime de bens do casamento.</p>
+    </div>
+
+    <div class="ornament">· · §  · ·</div>
+
+    <!-- 9 -->
+    <div class="section" id="conclusao">
+      <h2 class="section-title">9. Conclusão</h2>
+
+      <p>O presente artigo analisou dois dos temas mais relevantes do divórcio extrajudicial no Direito Notarial e Registral brasileiro: os documentos necessários para lavrar a escritura de divórcio e a questão da competência para escolha do Tabelião.</p>
+
+      <p>Em relação à <strong>documentação</strong>, conclui-se que o rol exigido é amplo e variado, compreendendo documentos pessoais dos cônjuges, certidão de casamento atualizada, documentos dos bens a partilhar e, quando houver, certidão dos filhos maiores. A presença obrigatória do advogado, longe de representar obstáculo, é garantia indispensável de segurança jurídica — compatível com o art. 133 da Constituição Federal e com os mais elementares princípios da proteção dos direitos das partes.</p>
+
+      <p>Em relação à <strong>competência</strong>, a inaplicabilidade das regras do CPC decorre da própria natureza da atividade notarial, que é administrativa e não jurisdicional. O art. 1.º da Resolução CNJ n.º 35/2007 consagra a livre escolha do Cartório de Notas, em homenagem à autonomia privada e à desburocratização.</p>
+
+      <p>Por fim, defende-se que a desjudicialização — da qual o divórcio extrajudicial é uma das mais bem-sucedidas expressões — é um instrumento de cidadania, de democratização do acesso à Justiça e de modernização do Estado brasileiro. Seu aperfeiçoamento contínuo, seja pela expansão das hipóteses de cabimento, seja pela maior publicidade e acesso à informação, é uma necessidade que a comunidade jurídica deve abraçar com convicção.</p>
+
+      <div class="callout" style="margin-top:32px;">
+        <strong>Palavras-chave:</strong> Divórcio extrajudicial · Lei n.º 11.441/2007 · Resolução CNJ n.º 35/2007 · Tabelião de Notas · Desjudicialização · Competência notarial · Autonomia privada · Acesso à Justiça · EC n.º 66/2010
+      </div>
+    </div>
+
+    <!-- REFERÊNCIAS -->
+    <div class="references" id="referencias">
+      <div class="references-title">Referências Bibliográficas e Normativas</div>
+      <ol>
+        <li>BRASIL. <em>Constituição da República Federativa do Brasil de 1988.</em> Brasília: Senado Federal, 1988.</li>
+        <li>BRASIL. <em>Lei n.º 11.441, de 4 de janeiro de 2007.</em> Altera dispositivos da Lei n.º 5.869/1973 (Código de Processo Civil), possibilitando a realização de inventário, partilha, separação consensual e divórcio consensual por via administrativa. Brasília: DOU, 2007.</li>
+        <li>BRASIL. Conselho Nacional de Justiça. <em>Resolução n.º 35, de 24 de abril de 2007.</em> Disciplina a aplicação da Lei n.º 11.441/07 pelos serviços notariais e de registro. Brasília: CNJ, 2007.</li>
+        <li>BRASIL. <em>Lei n.º 13.105, de 16 de março de 2015.</em> Código de Processo Civil. Brasília: DOU, 2015.</li>
+        <li>BRASIL. <em>Emenda Constitucional n.º 66, de 13 de julho de 2010.</em> Dá nova redação ao § 6.º do art. 226 da Constituição Federal. Brasília: DOU, 2010.</li>
+        <li>BRASIL. <em>Emenda Constitucional n.º 45, de 30 de dezembro de 2004.</em> Reforma do Poder Judiciário. Brasília: DOU, 2004.</li>
+        <li>LOUREIRO, Luiz Guilherme. <em>Registros Públicos: teoria e prática.</em> 10. ed. Salvador: JusPodivm, 2019.</li>
+        <li>CENEVIVA, Walter. <em>Lei dos Notários e dos Registradores Comentada.</em> 7. ed. São Paulo: Saraiva, 2010.</li>
+        <li>CASSETTARI, Christiano. <em>Separação, Divórcio e Inventário por Escritura Pública.</em> 7. ed. São Paulo: Método, 2014.</li>
+        <li>FISCHER, José Flávio Bueno. <em>Escrituras Públicas: separação, divórcio, inventário e partilha consensuais.</em> 2. ed. São Paulo: Revista dos Tribunais, 2008.</li>
+        <li>SUPREMO TRIBUNAL FEDERAL. <em>Tema n.º 1.053 da Repercussão Geral.</em> Existência ou não da separação judicial como requisito para o divórcio após a EC n.º 66/2010. Brasília: STF, 2022.</li>
+        <li>COLÉGIO NOTARIAL DO BRASIL. <em>Cartórios em Números.</em> Disponível em: www.notariado.org.br. Acesso em 2025.</li>
+      </ol>
+    </div>
+
+    <!-- AUTOR BIO -->
+    <div class="author-bio">
+      <div class="bio-avatar">F</div>
+      <div class="bio-content">
+        <div class="bio-label">Sobre o Autor</div>
+        <div class="bio-name">Filipe Nunes</div>
+        <div class="bio-text">
+          <p>Estudante de Direito. Este artigo foi produzido no âmbito da disciplina de Direito Registral e Notarial, com foco na análise crítica e doutrinária dos institutos de desjudicialização no ordenamento jurídico brasileiro.</p>
+        </div>
+      </div>
+    </div>
+
+  </article>
+</div>
+
+<footer>
+  <strong>Filipe Nunes</strong> · Direito Registral e Notarial · 2025<br>
+  <span style="margin-top:8px;display:block;">Conteúdo de caráter acadêmico. Não substitui orientação jurídica profissional.</span>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>
